@@ -20,7 +20,7 @@ export default function Page() {
 				<LineChart
 					width={500}
 					height={300}
-					data={weather.map((e, i) => ({name: e.createdAt + i, temp: e.temp}))}
+					data={weather.map((e, i) => ({...e, name: e.createdAt + i}))}
 					margin={{
 						top: 5,
 						right: 30,
@@ -34,6 +34,7 @@ export default function Page() {
 					<Tooltip />
 					<Legend />
 					<Line type='monotone' dataKey='temp' stroke='#8884d8' activeDot={{r: 8}} />
+					<Line type='monotone' dataKey='humidity' stroke='#82ca9d' />
 				</LineChart>
 			</ResponsiveContainer>
 		</div>
