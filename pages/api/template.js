@@ -1,4 +1,4 @@
-import {ObjectID, client, collections, connection, dbName, getColl} from "../../core/db"
+import {ObjectID, client, connection, dbName, getColl} from "../../core/db"
 import RequestHandler from "../../core/utils/RequestHandler"
 
 const handler = new RequestHandler({
