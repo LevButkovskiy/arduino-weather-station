@@ -9,10 +9,10 @@ handler.post(async (req, res) => {
 	try {
 		const {temp, humidity} = req.query
 
-		console.log("[POST] - ", new Date().toLocaleString(), "temp", temp, "humidity", humidity)
+		console.log("[POST] - ", new Date().toLocaleString(), "temp", +temp, "humidity", +humidity)
 
 		const coll = await getColl("weather")
-		await coll.insertOne({temp, humidity, createdAt: new Date()})
+		await coll.insertOne({temp: +temp, humidity: +humidity, createdAt: new Date()})
 		res.json({
 			success: true,
 		})
