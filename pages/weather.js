@@ -15,7 +15,7 @@ export default function Page() {
 		})
 	}, [])
 	return (
-		<div style={{width: "100vw", height: "100vh", padding: "10%"}}>
+		<div style={{width: "100vw", height: "100vh", padding: "5%"}}>
 			<ResponsiveContainer width='100%' height='100%'>
 				<LineChart
 					width={500}
