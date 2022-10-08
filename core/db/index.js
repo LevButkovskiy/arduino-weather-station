@@ -11,7 +11,6 @@ const dbName = process.env.MONGO_DATABASE
 module.exports = {
 	ObjectId,
 	client,
-	collections,
 	connection,
 	dbName,
 	getColl: async (coll) => {
