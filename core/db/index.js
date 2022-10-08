@@ -15,6 +15,6 @@ module.exports = {
 	dbName,
 	getColl: async (coll) => {
 		await connection
-		return client.db(dbName).collection(getModuleName(...name))
+		return client.db(dbName).collection(coll)
 	},
 }
