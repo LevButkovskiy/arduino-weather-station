@@ -1,0 +1,9 @@
+$mobile: 768px;
+
+.Container {
+	padding: 12px 24px;
+
+	@media screen and (min-width: $mobile) {
+		padding: 0 15%;
+	}
+}

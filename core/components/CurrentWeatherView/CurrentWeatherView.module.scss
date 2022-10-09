@@ -1,0 +1,16 @@
+$mobile: 768px;
+
+.CurrentWeatherView {
+	display: flex;
+	flex-direction: column;
+
+	@media screen and (min-width: $mobile) {
+		flex-direction: row;
+	}
+
+	.Measure {
+		.value {
+			font-weight: 500;
+		}
+	}
+}
