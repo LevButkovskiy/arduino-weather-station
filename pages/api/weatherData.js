@@ -8,10 +8,51 @@ const handler = new RequestHandler({
 handler
 	.get(async (req, res) => {
 		try {
-			console.log("[GET] - ", new Date().toLocaleString())
+			const date = new Date()
+			const {filters} = req.query
 
+			console.log("[GET] -", date.toLocaleString(), JSON.stringify(filters))
+
+			let filter = {}
+
+			if (Object.keys(filters).length) {
+				switch (filters.period) {
+					case "3h": {
+						filter.createdAt = {$gte: new Date(new Date() - 1000 * 60 * 60 * 3)}
+						break
+					}
+					case "1d": {
+						filter.createdAt = {$gte: new Date(new Date() - 1000 * 60 * 60 * 24)}
+						break
+					}
+					case "7d": {
+						filter.createdAt = {$gte: new Date(new Date() - 1000 * 60 * 60 * 24 * 7)}
+						break
+					}
+					case "1m": {
+						filter.createdAt = {$gte: new Date(new Date() - 1000 * 60 * 60 * 24 * 30)}
+						break
+					}
+				}
+			}
 			const coll = await getColl("weather")
-			const list = await coll.find({}).toArray()
+			const list = await coll
+				.aggregate([
+					{
+						$match: filter,
+					},
+					// {
+					// 	$project: {
+					// 		day: {$dayOfMonth: "$createdAt"},
+					// 		hour: {$hour: "$createdAt"},
+					// 		month: {$month: "$createdAt"},
+					// 	},
+					// },
+					{
+						$sort: {createdAt: 1},
+					},
+				])
+				.toArray()
 			res.json({
 				success: true,
 				list: list,
@@ -24,7 +65,7 @@ handler
 		try {
 			const {temp, humidity} = req.query
 
-			console.log("[POST] - ", new Date().toLocaleString(), "temp", +temp, "humidity", +humidity)
+			console.log("[POST] -", new Date().toLocaleString(), "temp", +temp, "humidity", +humidity)
 
 			const coll = await getColl("weather")
 			await coll.insertOne({temp: +temp, humidity: +humidity, createdAt: new Date()})
