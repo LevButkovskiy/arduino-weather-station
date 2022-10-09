@@ -1,7 +1,8 @@
 import _ from "lodash"
 
+import Chart from "../Chart/Chart"
 import CurrentPlantView from "../CurrentPlantView/CurrnetPlantView"
-import WeatherChart from "../WeatherChart/WeatherChart"
+import BorderedCard from "../UI/BorderedCard/BorderedCard"
 import styles from "./PlantsCharts.module.scss"
 
 const PLANTS_NAMES = {
@@ -17,8 +18,11 @@ export default function PlantsCharts({plantsData}) {
 				const plantData = plantsData.filter((e) => e.plant === plant)
 				return (
 					<div className={styles.chart} key={plant}>
-						<CurrentPlantView currentPlant={_.get(plantData, plantData?.length - 1)} />
-						<WeatherChart weather={plantData} label={_.get(PLANTS_NAMES, plant, plant)} measure={"humidity"} color={"#82ca9d"} />
+						<BorderedCard>
+							<h3>{_.get(PLANTS_NAMES, plant, plant)}</h3>
+							<CurrentPlantView currentPlant={_.get(plantData, plantData?.length - 1)} />
+							<Chart data={plantData} measure={"humidity"} color={"#82ca9d"} />
+						</BorderedCard>
 					</div>
 				)
 			})}

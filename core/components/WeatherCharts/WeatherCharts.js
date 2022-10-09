@@ -1,4 +1,4 @@
-import WeatherChart from "../WeatherChart/WeatherChart"
+import Chart from "../Chart/Chart"
 import styles from "./WeatherCharts.module.scss"
 
 const CHARTS = [
@@ -18,7 +18,7 @@ export default function WeatherCharts({weather}) {
 		<div className={styles.WeatherCharts}>
 			{CHARTS.map(({label, measure, color}) => (
 				<div className={styles.chart} key={measure}>
-					<WeatherChart weather={weather} label={label} measure={measure} color={color} />
+					<Chart data={weather} label={label} measure={measure} color={color} />
 				</div>
 			))}
 		</div>

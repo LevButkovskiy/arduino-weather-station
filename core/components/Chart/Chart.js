@@ -2,18 +2,18 @@ import {CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XA
 
 import {dateFormatter} from "../../utils/formatters"
 import BorderedCard from "../UI/BorderedCard/BorderedCard"
-import styles from "./WeatherChart.module.scss"
+import styles from "./Chart.module.scss"
 
-export default function WeatherChart({weather = [], measure = "", label = "", color = "", width = "100%", height = "100%"}) {
+export default function Chart({data = [], measure = "", label = "", color = "", width = "100%", height = "100%"}) {
 	return (
-		<div className={styles.WeatherChart} style={{width: width, height: height}}>
+		<div className={styles.Chart} style={{width: width, height: height}}>
 			<BorderedCard>
 				<h3>{label}</h3>
 				<ResponsiveContainer width={"100%"} height={"100%"}>
 					<LineChart
 						width={500}
 						height={300}
-						data={weather.map((e, i) => ({...e, name: dateFormatter(e.createdAt)}))}
+						data={data.map((e, i) => ({...e, name: dateFormatter(e.createdAt)}))}
 						margin={{
 							top: 5,
 							right: 30,
